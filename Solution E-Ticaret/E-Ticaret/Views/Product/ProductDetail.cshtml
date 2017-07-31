@@ -1,0 +1,83 @@
+﻿@using E_Ticaret.Models.Entities
+@model Product
+
+@{
+    ViewBag.Title = "ProductDetail";
+}
+
+<h1 class="page-header">@Model.Name - @Model.UnitPrice TL</h1>
+<p>@Model.Description</p>
+
+<div class="row">
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.Name)
+    @Html.HiddenFor(m => m.UnitPrice)
+    @Html.HiddenFor(m => m.productImagePath)    
+    <div class="col-sm-12 col-md-6 col-lg-6">       
+        <img src="@Url.Content(Model.productImagePath)" style="height:300px" />          
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-6">           
+        @if (Session["LogInId"] != null)
+        {
+            @*<div class="form-group">
+                <input type="number" id="count" class="form-control" value="1" min="1" step="1" max="@Model.UnitInStock" />
+            </div>*@
+            <div class="form-group">
+                <select id="count" class="form-control">
+                    @for (int i = 1; i <= Model.UnitInStock; i++)
+                    {                       
+                           <option value="@i">@i</option>                                                                             
+                    }                    
+                </select>
+            </div>
+            <div class="form-group">
+                <a id="submit_button" class="btn btn-success">Sepete Ekle</a>
+            </div>
+        }             
+    </div>
+</div>
+
+@section scripts{
+    
+    <script>
+        $("#submit_button").click(function () {
+
+            debugger;
+
+            var productId = $("#Id").val();
+
+            var productName = $("#Name").val();
+
+            var unitPrice = $("#UnitPrice").val();
+
+            var imagePath = $("#productImagePath").val();
+
+            var count = $("#count").val()
+           
+            $.ajax({
+                url: '@Url.Action("Create", "Basket")',
+                method: 'post',
+                data: {
+                    'productId': productId,
+                    'unitPrice': unitPrice,
+                    'count': count,
+                    'productName': productName,
+                    'imagePath': imagePath
+                },
+                success: function(data){
+                    alert("sepete eklendi");
+
+                    debugger;
+
+                    $("#cartQuantitySummary").text(data);                    
+                },
+                error: function (reponse) {
+                    alert("sepete eklenirken hata oluştu");
+                }
+            });
+        });
+    </script>
+    
+    }
+
+

@@ -1,0 +1,57 @@
+﻿@using E_Ticaret.Models.Entities
+@model List<Category>
+@{
+    ViewBag.Title = "Index";
+    
+}
+
+<div class="row">
+    <h1 class="page-header">Kategori Tablosu</h1>
+    @if (TempData["ResultMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["ResultMessage"]
+        </div>
+    }
+
+    @if (TempData["ResultFailMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["ResultFailMessage"]
+        </div>
+    }
+
+    <div>
+       <a href="@Url.Action("Create", "Category")" class="btn btn-success" style="margin-left:15px; margin-bottom:15px">Kategory Ekle</a>     
+    </div>
+   
+    <div class="col-sm-8">
+        <table class="table table-bordered">
+            <thead class="table-striped">
+                <tr>
+                    <th>Adı</th>
+                    <th>Açıklaması</th>
+                    <th>Resim</th>                   
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Description</td>
+                        <td>
+                            <img src="@Url.Content(item.categoryImagePath)" height="100"/>
+                        </td>                        
+                        <td>
+                            <a href="@Url.Action("Edit", "Category", new { id = item.Id })">Düzenle</a>
+                            @*<a href="@Url.Action("Delete", "Category", new { id = item.Id })" onclick="return confirm('Kaydı silmek istediğinize emin misiniz');">Sil</a>*@
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

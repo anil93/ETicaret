@@ -1,0 +1,52 @@
+﻿@using E_Ticaret.Models.Entities
+@model LogIn
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@if (ViewBag.ResultMessage != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.ResultMessage
+    </div>
+}
+
+@if (ViewBag.ResultSuccessMessage != null)
+{
+    <div class="alert alert-success">
+        @ViewBag.ResultSuccessMessage
+    </div>
+}
+
+<div class="row">
+    <h1 class="page-header">Kullanıcı Kayıt Sayfası</h1>
+    <div class="col-md-6 col-sm-8 col-lg-4">      
+        <form action="@Url.Action("Create", "LogIn")" method="post">
+            @Html.ValidationSummary(true)
+            <div class="form-group">
+                @Html.LabelFor(m => m.EMail, "E-Posta")
+                @Html.TextBoxFor(m => m.EMail, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.EMail)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.UserName, "Kullanıcı Adı")
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.UserName)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Password, "Şifre")
+                @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @type = "password" })
+                @Html.ValidationMessageFor(m => m.Password)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ConfirmPassword, "Şifre Tekrar")
+                @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", @type = "password" })
+                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+            </div>           
+            <div class="form-group">              
+                <button type="submit" class="btn btn-primary">Kaydet</button>
+            </div>
+        </form>
+    </div>
+</div>

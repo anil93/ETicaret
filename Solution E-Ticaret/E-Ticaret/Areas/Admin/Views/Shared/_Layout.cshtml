@@ -1,0 +1,83 @@
+﻿@*<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="col-md-2 col-md-offset-4 col-sm-4">
+        <ul class="nav nav-pills nav-stacked">
+            <li><a href="@Url.Action("Index","Home")">AnaSayfa</a></li>
+            <li><a href="@Url.Action("Index","Product")">Ürün Listele</a></li>
+            <li><a href="@Url.Action("Create","Product")">Ürün Kaydet</a></li>
+            <li><a href="@Url.Action("Index","Category")">Kategori Listele</a></li>
+            <li><a href="@Url.Action("Create","Category")">Kategori Kaydet</a></li>
+        </ul>
+    </div>    
+        @RenderBody()   
+</body>
+</html>*@
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">   
+    <title>@ViewBag.Title</title>
+    
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/font-awesome.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/main.css")" rel="stylesheet" />    
+</head>
+<body>
+    <nav class="navbar navbar-default sidebar" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Admin</a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="@Url.Action("Index", "Home")">Ana Sayfa<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ürün<span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity fa fa-tags fa-3x"></span></a>
+                        <ul class="dropdown-menu forAnimate" role="menu">
+                            <li><a href="@Url.Action("Index","Product")">Listeleme</a></li>
+                            <li class="divider"></li>
+                            <li><a href="@Url.Action("Create","Product")">Düzenleme</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Kategori<span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity fa fa-product-hunt fa-4x"></span></a>
+                        <ul class="dropdown-menu forAnimate" role="menu">
+                            <li><a href="@Url.Action("Index", "Category")">Listeleme</a></li>
+                            <li class="divider"></li>
+                            <li><a href="@Url.Action("Create", "Category")">Düzenleme</a></li>
+                        </ul>
+                    </li>                   
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        @RenderBody()
+    </div>    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>    
+    <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+    @*<script src="@Url.Content("~Scripts/script.js")"></script>*@
+</body>
+</html>

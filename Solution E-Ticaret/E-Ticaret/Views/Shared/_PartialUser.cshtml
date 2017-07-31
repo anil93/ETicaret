@@ -1,0 +1,13 @@
+﻿<div class="navbar">
+    <div class="container pull-right">
+        @Html.ActionLink("Çıkış", "SignOut", "Login", new { area = "" }, new { @class = "navbar-brand" })
+        @Html.ActionLink("Siparişlerim", "PastBaskets", "Basket", new { area = "", userId = (int)Session["LogInId"] }, new { @class = "navbar-brand" })       
+        @Html.ActionLink("Profil", "Create", "Profil", new { area = "" }, new { @class = "navbar-brand" })             
+        <a href="@Url.Action("Index","Basket")">
+           <img src="~/Images/Basket.png" width="25" height="25" style="margin-right:1px;margin-top:10px">(<span id="cartQuantitySummary">@Session["basketCount"]</span>)
+        </a>       
+        </div>
+    <div class="pull-left">
+        <label style="margin-left:15px; margin-top:15px">Hoş Geldiniz @Session["UserName"]</label>       
+    </div>
+</div>

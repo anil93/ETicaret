@@ -1,0 +1,49 @@
+﻿@using E_Ticaret.Models
+@model AddressMV
+
+@{
+    ViewBag.Title = "Address";
+}
+
+<div class="row">
+    <h1 class="page-header">Adres Kayıt Formu</h1>
+    <div class="col-md-6 col-sm-8 col-lg-4">
+        <form action="@Url.Action("Address", "Profil")" method="post">
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(m => m.Address.Id)
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.Address.Name, new { @class = "form-control", placeholder = "Ev Adresi" })
+                @Html.ValidationMessageFor(m => m.Address.Name)
+            </div>
+            <div class="form-group">               
+                @Html.TextAreaFor(m => m.Address.Detail, new { @class = "form-control", placeholder = "Örnek Mah. Deneme Sk. No:24/8 Ankara" })
+                @Html.ValidationMessageFor(m => m.Address.Detail)
+            </div>           
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Kaydet</button>                
+            </div>
+        </form>
+    </div>
+    <div class="col-md-6 col-sm-4 col-lg-8">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Adı</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Addresses)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>
+                            <a class="btn btn-success" href="@Url.Action("Address", "Profil", new { id = item.Id }) ">Düzenle</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

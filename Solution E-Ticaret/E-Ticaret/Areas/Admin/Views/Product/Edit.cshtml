@@ -1,0 +1,58 @@
+﻿@using E_Ticaret.Models.Entities
+@model Product
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="row">
+    <h1 class="page-header">Ürün Düzenleme</h1>
+    <div class="col-md-6 col-sm-8 col-lg-4">
+        @if (ViewBag.ResultMessage != null)
+        {
+            <div class="alert alert-danger">
+                @ViewBag.ResultMessage
+            </div>
+        }
+        <form action="@Url.Action("Edit", "Product")" method="post" enctype="multipart/form-data">
+            @Html.ValidationSummary(true)
+            <div class="form-group">
+                @Html.LabelFor(m => m.Name, "Ürün Adı")
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Name)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.CategoryId, "Kategorisi")
+                @Html.DropDownListFor(m => m.CategoryId, new SelectList(ViewBag.CategorySelectList, "Value", "Text"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.CategoryId)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.UnitPrice, "Birim Fiyatı")
+                @Html.TextBoxFor(m => m.UnitPrice, new { @class = "form-control", type = "number", @min = "0", @step = "1" })
+                @Html.ValidationMessageFor(m => m.UnitPrice)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.UnitInStock, "Stok Adedi")
+                @Html.TextBoxFor(m => m.UnitInStock, new { @class = "form-control", type = "number", @min = "0", @step = "1" })
+                @Html.ValidationMessageFor(m => m.UnitInStock)
+            </div>
+            <div class="form-inline">
+                @Html.LabelFor(m => m.Discontinued, "Satışta Değil")
+                @Html.CheckBoxFor(m => m.Discontinued)
+                @Html.ValidationMessageFor(m => m.Discontinued)
+            </div>           
+            <div class="form-group">
+                @Html.LabelFor(m => m.productImagePath, "Resim")
+                <input type="file" name="ImageFile" />
+            </div>
+            @Html.HiddenFor(m => m.productImagePath)
+            <div class="form-group">
+                @Html.ActionLink("İptal", "Index", null, new { @class = "btn btn-default" })
+                <button type="submit" class="btn btn-primary">Kaydet</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,35 @@
+﻿@using E_Ticaret.Models.Entities
+@model List<OrderDetail>
+
+@{
+    ViewBag.Title = "PastBasketDetails";
+}
+
+<h2>Geçmiş Siparişlerim</h2>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Resmi</th>
+            <th>Adı</th>
+            <th>Adedi</th>
+            <th>Birim Fiyatı</th>
+            <th>Toplam Fiyatı</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>
+                    <img src="@Url.Content(item.Product.productImagePath)" style="height:100px"/>
+                </th>
+                <th>@item.Product.Name</th>
+                <th>@item.Quantity</th>
+                <th>@item.UnitPrice</th>
+                <th>@(item.Quantity * item.UnitPrice)</th>
+            </tr>
+        }
+    </tbody>
+</table>
+

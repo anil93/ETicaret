@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@*@if (ViewBag.ResultMessage != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.ResultMessage
+    </div>
+}*@
+
+@*@if (ViewBag.ResultSuccessMessage != null)
+{
+    <div class="alert alert-success">
+        @ViewBag.ResultSuccessMessage
+    </div>
+}*@
+
+@if (TempData["ResultSuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["ResultSuccessMessage"]
+    </div>
+}
+  
+<header>
+    <h1>Interior Mobilya</h1>
+    <p>
+        Interior Mobilya 30 yılı aşan üretimi boyunca sahip olduğu bilgi ve tecrübeyi, siz değerli müşterileri ile paylaşmanın heyecanını duyar. Kurulduğu günden itibaren mobilya konusunda üretim yapan uzman kadroya sahip olan şirketimiz;
+    </p>
+    <p>
+        Berjer’ler,Koltuk Takımları, Abajurlar, Dekoratif Işıklar, Ofis Sandalyeleri, Avizeler, Ev Dekor Ürünleriyle birlikte mobilya sektöründe hizmet vermektedir.
+    </p>
+    <p>
+        Hizmetlerimiz ürün satışı, satış sonrası destek,yerinde kurulum, paketleme ve yurt içi ve yurt dışı lojistik operasyonlarını da kapsamaktadır.
+    </p>
+    <p>
+        Orta ölçekli bir işletme olmasına rağmen kurulduğu ilk andan itibaren kaliteye verdiği önem ve zoru başarma azmi sayesinde kısa sürede mobilya sektöründe tanınmış ve bu ilkelerinden asla vazgeçmemiştir.
+    </p>
+    <p>
+        Firmanın değişmez prensipleri daima kalite, hizmet, zamanında teslim ve uygun fiyat olmuştur.
+    </p>
+    <p>
+        Üretimde başarı ve sürekliliğin teminatı hizmette dürüstlük ve kalitedir prensibiyle çalışan Interior Mobilya, gösterdiğiniz yakın ilgi ve desteğinizden ötürü teşekkür ederek sizlere bugün ve gelecekte hizmet vermeye devam edecektir.
+    </p>
+    <p>
+        Aynı zamanda e ticaret sitesi üzerinden yapılacak kampayalarla birlikte müşterilere daha uygun fiyata daha kaliteli ürünler pazarlamaktır.
+    </p>
+</header>

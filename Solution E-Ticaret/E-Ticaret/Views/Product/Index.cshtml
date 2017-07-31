@@ -1,0 +1,42 @@
+﻿@using E_Ticaret.Models.Entities
+@model List<Product>
+
+@{
+    ViewBag.Title = "ProductList";
+}
+
+<div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Adı</th>
+                <th>Açıklaması</th>
+                <th>Fiyatı</th>
+                <th>Stok</th>
+                <th>Resim</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <th>@item.Description</th>
+                    <th>@item.UnitPrice TL</th>
+                    <th>@(item.UnitInStock == 0 ? "Stok Yok" : item.UnitInStock.ToString())</th>
+                    <th>
+                        <img src="@Url.Content(item.productImagePath)" style="height:50px" />
+                    </th>
+                    <th>
+                        @if (item.UnitInStock != 0)
+                        {
+                             @Html.ActionLink("Detay", "ProductDetail", "Product", new { productId = item.Id }, null)
+                        }
+                    </th>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

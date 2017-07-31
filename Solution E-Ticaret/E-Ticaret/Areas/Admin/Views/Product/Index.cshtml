@@ -1,0 +1,59 @@
+﻿@using E_Ticaret.Models.Entities
+@model List<Product>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <h1 class="page-header">Ürün Tablosu</h1>
+
+    @if (TempData["ResultMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["ResultMessage"]
+        </div>
+    }
+
+    <div>
+        <a href="@Url.Action("Create", "Product")" class="btn btn-success" style="margin-left:15px; margin-bottom:15px">Ürün Ekle</a>
+    </div>
+
+    <div></div>
+
+    <div class="col-sm-8">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Adı</th>                    
+                    <th>Kategorisi</th>
+                    <th>Birim Fiyatı</th>
+                    <th>Stok Adedi</th>
+                    <th>Satışta Mı</th>
+                    <th>Resim</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Category.Name</td>
+                        <td>@item.UnitPrice</td>
+                        <td>@item.UnitInStock</td>
+                        <td>@(item.Discontinued == true ? "Hayır" : "Evet")</td>
+                        <td>
+                            <img src="@Url.Content(item.productImagePath)" height="100"/>
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Edit", "Product", new { id = item.Id })">Düzenle</a>
+                            @*<a href="@Url.Action("Delete", "Product", new { id = item.Id })">Sil</a>*@
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

@@ -1,0 +1,69 @@
+﻿@using E_Ticaret.Models.Entities
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body>
+    
+    @if (Session["LogInId"] == null)
+    {
+        @Html.Partial("_PartialNonUser")            
+    }
+    else
+    {
+        @Html.Partial("_PartialUser")
+    }
+         
+    <div class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Ana Sayfa", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @foreach (var item in (List<Category>)TempData.Peek("CategoryList"))
+                {
+                    @Html.ActionLink(item.Name, "Index", "Product", new { area = "", categoryId = item.Id }, new { @class = "navbar-brand" })
+                    //TempData.Keep("CategoryList");
+                }
+                @*@Html.ActionLink("Berjerler", "Index", "Product", new { area = "", categoryId = 1 }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Koltuk Takımları", "Index", "Product", new { area = "", categoryId = 2 }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Abajurlar", "Index", "Product", new { area = "", categoryId = 3 }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Dekoratif Işıklar", "Index", "Product", new { area = "", categoryId = 4 }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Ofis Sandalyeleri", "Index", "Product", new { area = "", categoryId = 5 }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Avizeler", "Index", "Product", new { area = "", categoryId = 3 }, new { @class = "navbar-brand" })*@                
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav"></ul>
+            </div>
+        </div>
+    </div>          
+    <div class="container body-content">               
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Interior Mobilya</p>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script>
+        window.setTimeout(function () {
+            $(".alert").fadeTo(1500, 0).slideUp(500, function () {
+                $(this).remove();
+            });
+        }, 3000);
+    </script>   
+    @RenderSection("scripts", false)
+</body>
+</html>

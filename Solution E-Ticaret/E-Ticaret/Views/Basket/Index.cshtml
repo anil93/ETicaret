@@ -1,0 +1,74 @@
+﻿@using E_Ticaret.Models
+@model BasketAddressMV
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (ViewBag.ResultMessage != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.ResultMessage
+    </div>
+}
+
+@if (ViewBag.ResultSuccessMessage != null)
+{
+    <div class="alert alert-success">
+        @ViewBag.ResultSuccessMessage
+    </div>
+}
+
+<div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Adı</th>               
+                <th>Fiyatı</th>
+                <th>Adedi</th>
+                <th>Toplam Tutarı</th>
+                <th>Ürün Görseli</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.BasketMVList)
+            {
+                <tr>
+                    <td>@item.Name</td>                  
+                    <th>@item.UnitPrice TL</th>
+                    <th>@item.Quantity</th>
+                    <th>@item.TotalRow</th>
+                    <th>
+                        <img src="@Url.Content(item.ImagePath)" style="height:50px" />
+                    </th>
+                    <th>
+                        @Html.ActionLink("Çıkart", "DeleteOrder", "Basket", new { productId = item.Id }, new { onclick = "return confirm('Siparişinizi onaylıyor musunuz?');" })
+                    </th>
+                </tr>
+            }            
+            <tr>
+                <td style="font-weight: bold;font-size:21px">Toplam Sipariş Bedeli</td>
+                <td></td>
+                <td></td>
+                <td style="font-weight: bold;font-size:21px">@Model.TotalPrice TL</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+@if (Model.BasketMVList.Count > 0)
+{
+    using (Html.BeginForm("ApproveOrder", "Basket"))
+    {
+        <div class="form-group">
+            @Html.DropDownList("Addresses", new SelectList(Model.Addresses, "Detail", "Name"), new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Siparişi Onayla" class="btn btn-success" onclick="return confirm('Siparişinizi onaylıyor musunuz?');"/>
+        </div>
+    }
+}
+
+
